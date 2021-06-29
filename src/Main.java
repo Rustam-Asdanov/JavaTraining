@@ -1,28 +1,47 @@
-public class Main {
-    public static void main(String[] args){
-        int counter = 0;
-        int tester=0;
-        while(true){
-            System.out.println(counter);
-            if(deadCode(tester).equals("You win")) counter++;
-            tester++;
-            if(tester>100)break;
-        }
-        System.out.println(counter);
-    }
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 
-    public static String deadCode(int num){
-        while(true){
-            System.out.print(".");
-            num+=7;
-            if(num>35 && num<38) {
-                num+=10;
-            };
-            if(num >45 && num<50) {
-                return "You win";
+public class Main{
+    public static void main(String[] args){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("How many players we have: ");
+        try {
+            int players = Integer.parseInt(reader.readLine());
+
+            for(int i=0;i<players;i++){
+                int playerNum = (new Random()).nextInt(100);
+                System.out.println("Player "+i+" " +startWager(playerNum));
             }
 
-            if(num>100) return "infinity";
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    static int count = 0;
+    public static String startWager(int playerNum){
+        int[] happyNumbers = new int[4];
+
+        happyNumbers[0] = (new Random()).nextInt(100);
+        happyNumbers[1] = (new Random()).nextInt(100);
+        happyNumbers[2] = (new Random()).nextInt(100);
+        happyNumbers[3] = (new Random()).nextInt(100);
+
+        if(count==0){
+            System.out.print("Happy numbers are: ");
+            for(int i : happyNumbers){
+                System.out.print(i + "  ");
+            }
+            count++;
+            System.out.println();
+        }
+        for(int i : happyNumbers){
+            if(i==playerNum) return "winner";
+        }
+
+        return "loser";
     }
 }
