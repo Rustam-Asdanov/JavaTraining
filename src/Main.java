@@ -10,10 +10,18 @@ public class Main{
         System.out.print("How many players we have: ");
         try {
             int players = Integer.parseInt(reader.readLine());
+            int[] happyNumbers = new int[4];
+
+
+                happyNumbers[0] = (new Random()).nextInt(100);
+                happyNumbers[1] = (new Random()).nextInt(100);
+                happyNumbers[2] = (new Random()).nextInt(100);
+                happyNumbers[3] = (new Random()).nextInt(100);
+
 
             for(int i=0;i<players;i++){
                 int playerNum = (new Random()).nextInt(100);
-                System.out.println("Player "+i+" " +startWager(playerNum));
+                System.out.println("Player "+(i+1)+" number " + playerNum +"  " +startWager(happyNumbers, playerNum));
             }
 
         } catch (IOException e) {
@@ -22,13 +30,8 @@ public class Main{
     }
 
     static int count = 0;
-    public static String startWager(int playerNum){
-        int[] happyNumbers = new int[4];
+    public static String startWager(int[] happyNumbers, int playerNum){
 
-        happyNumbers[0] = (new Random()).nextInt(100);
-        happyNumbers[1] = (new Random()).nextInt(100);
-        happyNumbers[2] = (new Random()).nextInt(100);
-        happyNumbers[3] = (new Random()).nextInt(100);
 
         if(count==0){
             System.out.print("Happy numbers are: ");
@@ -45,3 +48,8 @@ public class Main{
         return "loser";
     }
 }
+
+/**
+ * Программа у нас спрашивает сколько игроков учавствует в игре,
+ *
+ */
